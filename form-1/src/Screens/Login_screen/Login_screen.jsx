@@ -17,6 +17,10 @@ const Login_screen = () => {
     let Login_func = () => {
         SetloginArray([...loginArray, Login])
         console.log(loginArray)
+        setLogin({
+            username: "",
+            userpassward: ""
+        })
     }
 
     return (
@@ -29,13 +33,18 @@ const Login_screen = () => {
                     // inputval(e)
                     setLogin({ ...Login, username: e.target.value })
                 }
-            }
-            label="Email" placholder="Enter a email..." type="email" value={Login.username} />
+                }
+                    label="Email" placholder="Enter a email..." type="email" value={Login.username} />
 
                 {/* INput For Passwards */}
                 <Input_ ONCHANGE={(e) => setLogin({ ...Login, userpassward: e.target.value })} label="Passward" placholder="Enter a Passward..." type="password" value={Login.userpassward} />
 
-                <button onClick={Login_func} className={styles.sign}>Sign in</button>
+                <button onClick={Login_func} className={styles.sign}
+                    disabled={Login.username === "" || Login.userpassward === ""}
+                >
+                    {Login.username === "" || Login.userpassward === "" ? "Fill Fields First" : "Signin"}
+                    
+                </button>
             </div>
 
             <br /><br /><br />
@@ -44,32 +53,25 @@ const Login_screen = () => {
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
                         <th>Username</th>
+                        <th>Password</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>{loginArray.username}</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Larry the Bird</td>
-                        <td>Larry the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
+                    {
+                        loginArray.map((e, i) => {
+                            return (
+                                < tr >
+                                    <td>{i}</td>
+                                    <td>{e.username}</td>
+                                    <td>{e.userpassward}</td>
+                                </ tr >
+                            )
+
+                        })
+                    }
                 </tbody>
-            </Table>
+            </Table >
         </>
     )
 }
