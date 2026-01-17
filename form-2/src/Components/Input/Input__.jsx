@@ -4,13 +4,11 @@ import styles from './Input__.module.css'
 const Input = ({ label, placeholder, type, ONCHANGE, value }) => {
   return (
 
-      <form className={styles.form}>
-        <div className={styles.inputGroup}>
-          <label>{label}</label>
-          <input onChange={ONCHANGE} type={type} placeholder={placeholder} value={value} />
-        </div>
+    <div className={styles.inputGroup}>
+      <label className={styles.labelfordesign}>{label}</label>
+      <input onChange={ONCHANGE} type={type} placeholder={placeholder} value={value} />
+    </div>
 
-      </form>
 
   )
 }
